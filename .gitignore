@@ -71,3 +71,11 @@ Thumbs.db
 *.dll
 *.exe
 
+!/src
+/src/release
+/src/release/*
+/src/debug
+/src/debug/*
+/src/.vs
+/src/.vs/*
+src/.qmake.stash
