@@ -59,7 +59,7 @@ void ImageArea::paintEvent(QPaintEvent * /* event */)
     g_window_size.y = this->height();
     calc_scale(&g_present_rect, &g_window_size, &g_scale);
     painter.translate(g_present_rect.lt.x, g_present_rect.lt.y);
-    /*painter.scale(this->width()/g_scale, this->height()/g_scale);*/
+    painter.scale(1, 1);
     g_left_x = g_present_rect.lt.x;
     g_top_y = g_present_rect.lt.y;
 

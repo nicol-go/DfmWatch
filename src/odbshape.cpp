@@ -374,14 +374,15 @@ void update_rect(point *pt, struct rect *area)
     {
         area->lt.x = pt->x;
     }
+
+	if (pt->y > area->lt.y)
+	{
+		area->lt.y = pt->y;
+	}
+
     if (pt->x > area->rb.x)
     {
         area->rb.x = pt->x;
-    }
-
-    if (pt->y > area->lt.y)
-    {
-        area->lt.y = pt->y;
     }
     if (pt->y < area->rb.y)
     {
@@ -397,8 +398,8 @@ void get_rect(struct layer *layer, struct rect *area)
 
     /* init rect */
     area->lt.x = INT_MAX;
-    area->lt.y = INT_MAX;
-    area->rb.x = INT_MAX;
+    area->lt.y = INT_MIN;
+    area->rb.x = INT_MIN;
     area->rb.y = INT_MAX;
 
     tmp_layer = layer;
