@@ -1,7 +1,7 @@
 #ifndef ODBSHAPE_H
 #define ODBSHAPE_H
 
-#include <stdio.h>
+#include <iostream>
 #include <math.h>
 
 #define MIRCO_EPS 10
@@ -83,7 +83,7 @@ int break_arc_to_point(shape *item, point_node **points, int *point_num);
 
 double calc_2point_angle(point p1, point p2, double *angle);
 
-int f_in(char *filename, struct layer **layer);
+int f_in(std::string filename, struct layer **layer);
 
 void get_rect(struct layer *layer, struct rect *area);
 

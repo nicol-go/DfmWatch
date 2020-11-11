@@ -1,15 +1,25 @@
 #include "dfmwatch.h"
 #include "ui_dfmwatch.h"
+#include "imagearea.h"
+#include <QtWidgets>
 
-dfmwatch::dfmwatch(QWidget *parent)
+DfmWatch::DfmWatch(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::dfmwatch)
+    //, ui(new Ui::dfmwatch)
 {
-    ui->setupUi(this);
+    //ui->setupUi(this);
+    imageArea = new ImageArea;
+    QGridLayout* mainLayout = new QGridLayout;
+    mainLayout->addWidget(imageArea, 0, 0);
+    setLayout(mainLayout);
 }
 
-dfmwatch::~dfmwatch()
+DfmWatch::~DfmWatch()
 {
-    delete ui;
+    //delete ui;
 }
 
+void DfmWatch::creatActions()
+{
+
+}

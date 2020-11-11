@@ -63,7 +63,7 @@ double calc_2point_angle(point p1, point p2, double *angle)
         }
     }
 
-    return (1);
+    return 0;
 }
 
 int break_arc_to_point(shape *item, point_node **points, int *point_num)
@@ -138,7 +138,7 @@ int break_arc_to_point(shape *item, point_node **points, int *point_num)
     *points = tmp_node;
     (*point_num)++;
 
-    return (1);
+    return 0;
 }
 
 
@@ -150,18 +150,18 @@ double getvalue(ifstream& fp)
     double result;
     char strtmp[100];
 
-    fp >> c;
+    fp.get(c);
     i = 0;
 
     while (c == ' ')
     {
-        fp >> c;;
+        fp.get(c);
     }
 
     while (c != ' ' && c != '\n')
     {
         strtmp[i++] = c;
-        fp >> c;;
+        fp.get(c);
     }
 
     strtmp[i] = '\0';
@@ -206,17 +206,14 @@ int f_in(string filename, struct layer **layer)
         exit(1); // terminate with error
     }
 
-
     *layer = NULL;
-
     /* read data from layer */
     /* A is Arc, L is Line, N is new layer, S is start surface, E is end of surface */
-
     /* filter out no need letter at the beginning */
-    inFile >> c;
+    inFile.get(c);
     while (c != EOF && c != 'N')
     {
-        inFile >> c;
+        inFile.get(c);
     }
 
     bool is_surf_first_edge = false;
@@ -228,7 +225,7 @@ int f_in(string filename, struct layer **layer)
         /* get the start of line or arc */
         while (c != EOF)
         {
-            inFile >> c;
+            inFile.get(c);
             if (c == 'S')
             {
                 is_surf_first_edge = true;
@@ -324,7 +321,7 @@ int f_in(string filename, struct layer **layer)
             }
             while (c != EOF && c != 'N')
             {
-                inFile >> c;
+                inFile.get(c);
                 if (c == 'E')
                 {
                     is_surface = false;
@@ -368,7 +365,7 @@ int f_in(string filename, struct layer **layer)
 
     inFile.close();
 
-    return (1);
+    return 0;
 }
 
 void update_rect(point *pt, struct rect *area)

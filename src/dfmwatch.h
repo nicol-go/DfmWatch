@@ -4,18 +4,22 @@
 #include <QWidget>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class dfmwatch; }
+namespace Ui { class DfmWatch; }
 QT_END_NAMESPACE
+class ImageArea;
 
-class dfmwatch : public QWidget
+class DfmWatch : public QWidget
 {
     Q_OBJECT
 
 public:
-    dfmwatch(QWidget *parent = nullptr);
-    ~dfmwatch();
+    DfmWatch(QWidget *parent = nullptr);
+    ~DfmWatch();
 
 private:
-    Ui::dfmwatch *ui;
+    //Ui::dfmwatch *ui;
+    void creatActions();
+
+    ImageArea* imageArea;
 };
 #endif // DFMWATCH_H
