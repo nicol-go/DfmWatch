@@ -211,19 +211,19 @@ int f_in(string filename, struct layer **layer)
     /* A is Arc, L is Line, N is new layer, S is start surface, E is end of surface */
     /* filter out no need letter at the beginning */
     inFile.get(c);
-    while (c != EOF && c != 'N')
+    while (!inFile.eof() && c != 'N')
     {
         inFile.get(c);
     }
 
     bool is_surf_first_edge = false;
     bool is_surface = false;
-    while (c != EOF && c == 'N')
+    while (!inFile.eof() && c == 'N')
     {
         head = NULL;
 
         /* get the start of line or arc */
-        while (c != EOF)
+        while (!inFile.eof())
         {
             inFile.get(c);
             if (c == 'S')
@@ -238,7 +238,7 @@ int f_in(string filename, struct layer **layer)
         }
 
         /* collect line and arc for one layer */
-        while (c != EOF && (c == 'L' || c == 'A'))
+        while (!inFile.eof() && (c == 'L' || c == 'A'))
         {
             new_shape = (struct shape *) malloc(sizeof(struct shape));
             new_shape->next = NULL;
@@ -319,7 +319,7 @@ int f_in(string filename, struct layer **layer)
             {
                 is_surf_first_edge = false;
             }
-            while (c != EOF && c != 'N')
+            while (!inFile.eof() && c != 'N')
             {
                 inFile.get(c);
                 if (c == 'E')
