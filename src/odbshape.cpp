@@ -184,7 +184,7 @@ int f_in(string filename, struct layer **layer)
 {
     char c;
     char d;
-    string filename2 = "C:/debug/feature";
+    string filename2 = "C:/debug/feature2";
     struct shape *pre_shape;
     struct shape *new_shape;
     struct node *new_node;
@@ -260,7 +260,7 @@ int f_in(string filename, struct layer **layer)
                 }
             }
 
-            inFile >> d;
+            inFile.get(d);
             if (c == 'L')
             {
                 new_shape->shape_type = 'L';
@@ -467,6 +467,5 @@ void calc_scale(struct rect *logical_rect, point *window_size, double *scale)
     dx = abs(logical_rect->rb.x - logical_rect->lt.x);
     dy = abs(logical_rect->lt.y - logical_rect->rb.y);
     *scale = max((dx*1.0) / window_size->x, (dy*1.0) / window_size->y);
-
 }
 

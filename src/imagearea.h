@@ -2,6 +2,7 @@
 #define IMAGEAREA_H
 
 #include <QWidget>
+#include "odbshape.h"
 
 class ImageArea : public QWidget
 {
@@ -15,6 +16,9 @@ public:
 
 protected:
     void paintEvent(QPaintEvent *event) override;
+
+private:
+    int show_polygon(QPainter& painter, point_node* head, int point_num);
 };
 
 #endif // IMAGEAREA_H
