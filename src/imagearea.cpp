@@ -52,14 +52,20 @@ void ImageArea::paintEvent(QPaintEvent * /* event */)
     point_node* points = NULL;
     static int size = 10;
 
+	static const QPoint npoints[4] = {
+		QPoint(10, 80),
+		QPoint(20, 10),
+		QPoint(80, 30),
+		QPoint(90, 70)
+	};
     QPainter painter(this);
     //painter.setRenderHint(QPainter::Antialiasing);// much smoother
-
     g_window_size.x = this->width();
     g_window_size.y = this->height();
     calc_scale(&g_present_rect, &g_window_size, &g_scale);
-    painter.translate(g_present_rect.lt.x, g_present_rect.lt.y);
-    painter.scale(1, 1);
+    painter.translate(-g_present_rect.lt.x, -g_present_rect.rb.y);
+	painter.setWindow(-width() / 2, height() / 2, width(), -height());
+    //painter.scale(10, 10);
     g_left_x = g_present_rect.lt.x;
     g_top_y = g_present_rect.lt.y;
 
@@ -108,7 +114,10 @@ void ImageArea::paintEvent(QPaintEvent * /* event */)
         
         painter.setPen(pen);
         painter.setBrush(brush);
-
+		/*painter.translate(0, 0);
+		painter.scale(0.5, 0.5);
+		painter.drawPolygon(npoints, 4);
+		return;*/
         if (layer->contour_item != NULL)
         {
             tmp_node = layer->contour_item;
