@@ -59,20 +59,30 @@ void ImageArea::paintEvent(QPaintEvent * /* event */)
 		QPoint(90, 70)
 	};
     QPainter painter(this);
-    //painter.setRenderHint(QPainter::Antialiasing);// much smoother
+    painter.setRenderHint(QPainter::Antialiasing);// much smoother
     g_window_size.x = this->width();
     g_window_size.y = this->height();
     calc_scale(&g_present_rect, &g_window_size, &g_scale);
-    painter.translate(-g_present_rect.lt.x, -g_present_rect.rb.y);
-	painter.setWindow(-width() / 2, height() / 2, width(), -height());
-    //painter.scale(10, 10);
-    g_left_x = g_present_rect.lt.x;
-    g_top_y = g_present_rect.lt.y;
-
     int dx;
     int dy;
     dx = abs(g_present_rect.rb.x - g_present_rect.lt.x);
     dy = abs(g_present_rect.lt.y - g_present_rect.rb.y);
+    //painter.setWindow(-width() / 2, height() / 2, width(), -height());
+    painter.setWindow(g_present_rect.lt.x - 10, g_present_rect.lt.y + 10,
+        g_present_rect.rb.x - g_present_rect.lt.x + 10, g_present_rect.rb.y - g_present_rect.lt.y - 10);
+    int Lx, Ly, Rx, Ry;
+    Lx = painter.window().topLeft().x();
+    Ly = painter.window().topLeft().y();
+    Rx = painter.window().bottomRight().x();
+    Ry = painter.window().bottomRight().y();
+    
+    
+    //painter.translate(-g_present_rect.lt.x, -g_present_rect.rb.y);
+	
+	//painter.setWindow(g_present_rect.lt.x, g_present_rect.lt.y, dx, dy);
+    //painter.scale(0.75, 0.75);
+    g_left_x = g_present_rect.lt.x;
+    g_top_y = g_present_rect.lt.y;
 
     int layer_num = 0;
     layer = g_layer;
@@ -107,6 +117,7 @@ void ImageArea::paintEvent(QPaintEvent * /* event */)
         }
         /* set pen */
         QPen pen;
+        pen.setWidth(0.1);
         pen.setColor(ncolor);
         /* set brush */
         QBrush brush;
@@ -235,7 +246,7 @@ void ImageArea::paintEvent(QPaintEvent * /* event */)
 
 int ImageArea::show_polygon(QPainter& painter, point_node* head, int point_num)
 {
-    QPoint* points = new QPoint[point_num];
+    QPoint* points = new QPoint[point_num - 1];
     point_node* pt_node;
     point_node* pre_node;
     pt_node = head;
